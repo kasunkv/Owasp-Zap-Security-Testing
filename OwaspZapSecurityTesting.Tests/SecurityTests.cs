@@ -37,6 +37,17 @@ namespace OwaspZapSecurityTesting.Tests
             CheckActiveScanProgress(activeScanId);
         }
 
+        [ClassCleanup]
+        public static void CleanUpAndGenerateReport()
+        {
+            _zapClient.Dispose();
+            
+            var reportFilename = $"{DateTime.Now.ToString("dd-MMM-yyyy-hh-mm-ss")}_OWASP_ZAP_Report";
+            GenerateXmlReport(reportFilename);
+            GenerateHTMLReport(reportFilename);
+            GenerateMarkdownReport(reportFilename);
+        }
+
 
         private string StartSpidering()
         {
