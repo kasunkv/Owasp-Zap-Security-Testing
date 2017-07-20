@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OWASPZAPDotNetAPI;
 using System.Threading;
+using System.IO;
 
 namespace OwaspZapSecurityTesting.Tests
 {
@@ -80,6 +81,24 @@ namespace OwaspZapSecurityTesting.Tests
             }
 
             Thread.Sleep(5000);
+        }
+
+        private static void GenerateXmlReport(string filename)
+        {
+            var fileName = $"{filename}.xml";
+            File.WriteAllBytes(fileName, _zapClient.core.xmlreport(_zapApiKey));
+        }
+
+        private static void GenerateHTMLReport(string filename)
+        {
+            var fileName = $"{filename}.html";
+            File.WriteAllBytes(fileName, _zapClient.core.htmlreport(_zapApiKey));
+        }
+
+        private static void GenerateMarkdownReport(string filename)
+        {
+            var fileName = $"{filename}.md";
+            File.WriteAllBytes(fileName, _zapClient.core.mdreport(_zapApiKey));
         }
     }
 }
