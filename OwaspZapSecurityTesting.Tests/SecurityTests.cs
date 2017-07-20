@@ -1,0 +1,21 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OWASPZAPDotNetAPI;
+using System.Threading;
+
+namespace OwaspZapSecurityTesting.Tests
+{
+    [TestClass]
+    public class SecurityTests
+    {
+        private readonly static string _zapApiKey = "62simrufj37n98f5r0dmj68q8q";
+        private readonly static string _zapUrl = "zap.k2vsoftware.com";
+        private readonly static int _zapPort = 80;
+        private readonly string _targetUrl = "http://k2vowasptestsite.azurewebsites.net/"; // Web App Hosted on Azure
+
+        private static ClientApi _zapClient;
+        private IApiResponse _response;
+
+        
+    }
+}
