@@ -22,6 +22,35 @@ namespace OwaspZapSecurityTesting.Tests
             _zapClient = new ClientApi(_zapUrl, _zapPort, _zapApiKey);
         }
 
+        [TestMethod]
+        public void ExecuteSpider()
+        {
+            var spiderId = StartSpidering();
+            CheckSpideringProgress(spiderId);
+        }
+
         
+
+        private string StartSpidering()
+        {
+            _response = _zapClient.spider.scan(_zapApiKey, _targetUrl, "", "", "", "");
+            return ((ApiResponseElement)_response).Value;
+        }
+
+        private void CheckSpideringProgress(string spideringId)
+        {
+            int progress;
+            while (true)
+            {
+                Thread.Sleep(10000);
+                progress = int.Parse(((ApiResponseElement)_zapClient.spider.status(spideringId)).Value);
+                if (progress >= 100)
+                {
+                    break;
+                }
+            }
+
+            Thread.Sleep(5000);
+        }        
     }
 }
