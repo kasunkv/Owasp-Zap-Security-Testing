@@ -16,6 +16,12 @@ namespace OwaspZapSecurityTesting.Tests
         private static ClientApi _zapClient;
         private IApiResponse _response;
 
+        [ClassInitialize]
+        public static void Initialize(TestContext context)
+        {
+            _zapClient = new ClientApi(_zapUrl, _zapPort, _zapApiKey);
+        }
+
         
     }
 }
