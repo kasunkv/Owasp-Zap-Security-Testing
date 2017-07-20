@@ -29,7 +29,13 @@ namespace OwaspZapSecurityTesting.Tests
             CheckSpideringProgress(spiderId);
         }
 
-        
+        [TestMethod]
+        public void ExecuteActiveScan()
+        {
+            var activeScanId = StartActiveScan();
+            CheckActiveScanProgress(activeScanId);
+        }
+
 
         private string StartSpidering()
         {
@@ -51,6 +57,29 @@ namespace OwaspZapSecurityTesting.Tests
             }
 
             Thread.Sleep(5000);
-        }        
+        }
+        
+        private string StartActiveScan()
+        {
+            _response = _zapClient.ascan.scan(_zapApiKey, _targetUrl, "", "", "", "", "", "");
+            return ((ApiResponseElement)_response).Value;
+        }
+
+        private void CheckActiveScanProgress(string activeScanId)
+        {
+            int progress;
+            while (true)
+            {
+                Thread.Sleep(10000);
+                progress = int.Parse(((ApiResponseElement)_zapClient.ascan.status(activeScanId)).Value);
+
+                if (progress >= 100)
+                {
+                    break;
+                }
+            }
+
+            Thread.Sleep(5000);
+        }
     }
 }
