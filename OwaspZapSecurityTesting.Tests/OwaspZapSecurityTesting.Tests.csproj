@@ -52,6 +52,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RiskCode.cs" />
+    <Compile Include="SecurityScanResult.cs" />
     <Compile Include="SecurityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZapReportModels\Alertitem.cs" />
