@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OWASPZAPDotNetAPI;
 using System.Threading;
 using System.IO;
+using System.Collections.Generic;
+using OwaspZapSecurityTesting.Tests.ZapReportModels;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace OwaspZapSecurityTesting.Tests
 {
@@ -44,6 +48,20 @@ namespace OwaspZapSecurityTesting.Tests
             GenerateXmlReport(reportFilename);
             GenerateHTMLReport(reportFilename);
             GenerateMarkdownReport(reportFilename);
+        }
+
+        private List<Alertitem> GetScanAlerts()
+        {
+            OWASPZAPReport report = null;
+            using (var memoryStream = new MemoryStream(_zapClient.core.xmlreport(_zapApiKey)))
+            {
+                var xmlDoc = new XmlDocument();
+                xmlDoc.Load(memoryStream);
+
+                var serializer = new XmlSerializer(typeof(OWASPZAPReport));
+                report = (OWASPZAPReport)serializer.Deserialize(new XmlNodeReader(xmlDoc.DocumentElement));
+            }
+            return report.Site.Alerts.Alertitem;
         }
 
 
