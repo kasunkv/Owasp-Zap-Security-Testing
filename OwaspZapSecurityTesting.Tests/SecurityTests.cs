@@ -38,7 +38,7 @@ namespace OwaspZapSecurityTesting.Tests
             var activeScanId = StartActiveScan();
             CheckActiveScanProgress(activeScanId);
 
-            // Assert
+            // Security Criteria We define
             var expectedResult = new SecurityScanResult
             {
                 InformationalAlerts = 0,
@@ -49,9 +49,9 @@ namespace OwaspZapSecurityTesting.Tests
 
             var actualResult = GetScanResults();
 
-            Assert.AreEqual(expectedResult.LowAlerts, actualResult.LowAlerts, "Low Alerts have exceeded the expected values.");
-            Assert.AreEqual(expectedResult.MediumAlerts, actualResult.MediumAlerts, "Medium Alerts have exceeded the expected values.");
-            Assert.AreEqual(expectedResult.HighAlerts, actualResult.HighAlerts, "High Alerts have exceeded the expected values.");
+            Assert.IsTrue(actualResult.LowAlerts <= expectedResult.LowAlerts, "Low Alerts have exceeded the expected values.");
+            Assert.IsTrue(actualResult.MediumAlerts <= expectedResult.MediumAlerts, "Medium Alerts have exceeded the expected values.");
+            Assert.IsTrue(actualResult.HighAlerts <= expectedResult.HighAlerts, "High Alerts have exceeded the expected values.");
         }        
 
         [ClassCleanup]
