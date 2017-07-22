@@ -49,10 +49,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SecurityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZapReportModels\Alertitem.cs" />
+    <Compile Include="ZapReportModels\Alerts.cs" />
+    <Compile Include="ZapReportModels\Instance.cs" />
+    <Compile Include="ZapReportModels\Instances.cs" />
+    <Compile Include="ZapReportModels\OWASPZAPReport.cs" />
+    <Compile Include="ZapReportModels\Site.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
