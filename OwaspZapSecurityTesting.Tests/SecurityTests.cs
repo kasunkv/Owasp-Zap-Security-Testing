@@ -37,6 +37,21 @@ namespace OwaspZapSecurityTesting.Tests
             //  Active Scan
             var activeScanId = StartActiveScan();
             CheckActiveScanProgress(activeScanId);
+
+            // Assert
+            var expectedResult = new SecurityScanResult
+            {
+                InformationalAlerts = 0,
+                LowAlerts = 3,
+                MediumAlerts = 2,
+                HighAlerts = 0
+            };
+
+            var actualResult = GetScanResults();
+
+            Assert.AreEqual(expectedResult.LowAlerts, actualResult.LowAlerts, "Low Alerts have exceeded the expected values.");
+            Assert.AreEqual(expectedResult.MediumAlerts, actualResult.MediumAlerts, "Medium Alerts have exceeded the expected values.");
+            Assert.AreEqual(expectedResult.HighAlerts, actualResult.HighAlerts, "High Alerts have exceeded the expected values.");
         }        
 
         [ClassCleanup]
