@@ -64,6 +64,32 @@ namespace OwaspZapSecurityTesting.Tests
             return report.Site.Alerts.Alertitem;
         }
 
+        private SecurityScanResult GetScanResults()
+        {
+            var result = new SecurityScanResult();
+            var scanAlerts = GetScanAlerts();
+
+            foreach (var alert in scanAlerts)
+            {
+                switch (alert.Riskcode)
+                {
+                    case RiskCode.Informational:
+                        result.InformationalAlerts++;
+                        break;
+                    case RiskCode.Low:
+                        result.LowAlerts++;
+                        break;
+                    case RiskCode.Medium:
+                        result.MediumAlerts++;
+                        break;
+                    case RiskCode.High:
+                        result.HighAlerts++;
+                        break;
+                }
+            }
+
+            return result;
+        }
 
         private string StartSpidering()
         {
