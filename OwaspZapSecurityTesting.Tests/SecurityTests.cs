@@ -24,18 +24,16 @@ namespace OwaspZapSecurityTesting.Tests
         }
 
         [TestMethod]
-        public void ExecuteSpider()
+        public void ExecuteSecurityScan()
         {
+            // Spidering
             var spiderId = StartSpidering();
             CheckSpideringProgress(spiderId);
-        }
 
-        [TestMethod]
-        public void ExecuteActiveScan()
-        {
+            //  Active Scan
             var activeScanId = StartActiveScan();
             CheckActiveScanProgress(activeScanId);
-        }
+        }        
 
         [ClassCleanup]
         public static void CleanUpAndGenerateReport()
